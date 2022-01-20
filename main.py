@@ -1,127 +1,177 @@
-﻿count = 0
-name = ''
-MorseCode = {'а': '.-',
-             'б': '-...',
-             'в': '.--',
-             'г': '--.',
-             'д': '-..',
-             'е': '.',
-             'ё': '.',
-             'ж': '...-',
-             'з': '--..',
-             'и': '..',
-             'й': '.---',
-             'к': '-.-',
-             'л': '.-..',
-             'м': '--',
-             'н': '-.',
-             'о': '---',
-             'п': '.--.',
-             'р': '.-.',
-             'с': '...',
-             'т': '-',
-             'у': '..-',
-             'ф': '..-.',
-             'х': '....',
-             'ц': '-.-.',
-             'ч': '---.',
-             'ш': '----',
-             'щ': '--.-',
-             'ъ': '.--.-.',
-             'ы': '-.--',
-             'ь': '-..-',
-             'э': '..-..',
-             'ю': '..--',
-             'я': '.-.-',
-             ' ': ' '}
-morse_en = {'a': '.-',
-            'b': '-...',
-            'c': '-.-.',
-            'd': '-..',
-            'e': '.',
-            'f': '..-.',
-            'g': '--.',
-            'h': '....',
-            'i': '..',
-            'j': '.---',
-            'k': '-.-',
-            'l': '.-..',
-            'm': '--',
-            'n': '-.',
-            'o': '---',
-            'p': '.--.',
-            'q': '--.-',
-            'r': '.-.',
-            's': '...',
-            't': '-',
-            'u': '..-',
-            'v': '...-',
-            'w': '.--',
-            'x': '-..-',
-            'y': '-.--',
-            'z': '--..',}
+﻿MORSE_CODE_RU = {'а': '.-',
+                 'б': '-...',
+                 'в': '.--',
+                 'г': '--.',
+                 'д': '-..',
+                 'е': '.',
+                 'ж': '...-',
+                 'з': '--..',
+                 'и': '..',
+                 'й': '.---',
+                 'к': '-.-',
+                 'л': '.-..',
+                 'м': '--',
+                 'н': '-.',
+                 'о': '---',
+                 'п': '.--.',
+                 'р': '.-.',
+                 'с': '...',
+                 'т': '-',
+                 'у': '..-',
+                 'ф': '..-.',
+                 'х': '....',
+                 'ц': '-.-.',
+                 'ч': '---.',
+                 'ш': '----',
+                 'щ': '--.-',
+                 'ъ': '.--.-.',
+                 'ы': '-.--',
+                 'ь': '-..-',
+                 'э': '..-..',
+                 'ю': '..--',
+                 'я': '.-.-',
+                 ' ': ' '}
+MORSE_CODE_EN = {'a': '.-',
+                 'b': '-...',
+                 'c': '-.-.',
+                 'd': '-..',
+                 'e': '.',
+                 'f': '..-.',
+                 'g': '--.',
+                 'h': '....',
+                 'i': '..',
+                 'j': '.---',
+                 'k': '-.-',
+                 'l': '.-..',
+                 'm': '--',
+                 'n': '-.',
+                 'o': '---',
+                 'p': '.--.',
+                 'q': '--.-',
+                 'r': '.-.',
+                 's': '...',
+                 't': '-',
+                 'u': '..-',
+                 'v': '...-',
+                 'w': '.--',
+                 'x': '-..-',
+                 'y': '-.--',
+                 'z': '--..',
+                 ' ': ' '}
 
 
-def decode_from_morse(code):
-    #ну тут понятно я думаю, это декодировать
-    code = code.split()
-    decode = ''
-    for elem in code:
-        for key, codex in MorseCode.items():
-            if elem == codex:
-                decode += key
-    return decode.capitalize()
+def decode_from_morse(code, lang):
+    # ну тут понятно я думаю, это декодировать
+    if lang.lower() == "en":
+        code = code.split()
+        decode = ''
+        for elem in code:
+            for key, codex in MORSE_CODE_EN.items():
+                if elem == codex:
+                    decode += key
+        return decode.capitalize()
+    elif lang.lower() == "ru":
+        code = code.split()
+        decode = ''
+        for elem in code:
+            for key, codex in MORSE_CODE_RU.items():
+                if elem == codex:
+                    decode += key
+        return decode.capitalize()
 
 
-def encode_to_morse(text):
-    #а тут закодировать
-    text = text.lower()
-    encode = []
-    for elem in text:
-        encode.append(MorseCode.get(elem))
-    return ' '.join(encode)
+def encode_to_morse(text, lang="en"):
+    if lang.lower() == "en":
+        text = text.lower()
+        encode = []
+        for char in text:
+            encode.append(MORSE_CODE_EN.get(char))
+        return ' '.join(encode)
+    elif lang.lower() == "ru":
+        text = text.lower()
+        encode = []
+        for char in text:
+            encode.append(MORSE_CODE_RU.get(char))
+        return ' '.join(encode)
 
 
 def main():
-    #а тут вызывное меню, которое принимает соо и раскидывает как раз, предупреждене выводит один раз в самом начале
-    global name
-    global count
-    if count == 0:
-        print(f'ПРЕДУПРЕЖДЕНИЕ! '
-              f'Наша программа умеет кодировать и декодировать сообщения на двух языках! '
-              f'Но она пока не научилась отличать строчные буквы от заглавных, поэтому сообщения '
-              f'могут декодироваться с небольшой неточностью.')
-    print(f'{name.capitalize()}, Что Вы хотите сделать: закодировать или декодировать сообщение?')
-    flag = input()
-    while flag != 'декодировать' and flag != 'закодировать':
-        print('Что Вы хотите сделать: закодировать или декодировать сообщение?')
-        flag = input()
-    if flag == 'декодировать':
-        print('Введите сообщение, которое Вы хотите декодировать:')
-        txt = input()
-        print(decode_from_morse(txt))
-    if flag == 'закодировать':
-        print('Введите текст, которое Вы хотите закодировать:')
-        txt = input()
-        print(encode_to_morse(txt))
-
-
-def main1():
-    global name
-    print('Здравствуйте, представьтесь, пожалуйста!')
+    print("Howdy! What's your name?")
     name = input()
-    print(f"Здравствуйте, {name}! Приветсвуем Вас в нашей тестовой версии Азбуки Морзе!")
-    main()
-    print('Хотите сделать что-то еще?')
-    flag = input()
-    while flag != 'нет' and flag != 'да':
-        print(f'{name.capitalize()}, вы хотите еще раз протестировать нашу программу?')
-        flag = input()
-    if flag == 'да':
-        main()
+    print(f"Hello, {name}! Welcome to our 'Encoder/Decoder Morse code'! Please, choose your language (ru/en)")
+    while True:
+        lang = input()
+        if lang.lower() == "ru" or lang.lower() == "en":
+            break
+        print("Incorrect request!")
+        print(f"Hello, {name}! Welcome to our 'Encoder/Decoder Morse code'! Please, choose your language (ru/en)")
+    if lang.lower() == "ru":
+        while True:
+            print("ПРЕДУПРЕЖДЕНИЕ!\n"
+                  "Наша программа умеет кодировать и декодировать сообщения на двух языках!"
+                  "Но она пока не научилась отличать строчные буквы от заглавных, поэтому сообщения"
+                  "могут декодироваться с небольшой неточностью.\n"
+                  "Также вы в любое время можете ввести '/exit' для выхода из программы.")
+            print("Что Вы хотите сделать: закодировать или декодировать сообщение?")
+
+            while True:
+                request = input()
+                if request.lower() != 'декодировать' and request.lower() != 'закодировать':
+                    print("Неправильно введен запрос!")
+                    print("Что Вы хотите сделать: закодировать или декодировать сообщение?")
+                    continue
+                elif request.lower() == "/exit":
+                    exit()
+                break
+
+            print(f"Введите сообщение, которое Вы хотите {request}:")
+            if request.lower() == 'декодировать':
+                print(decode_from_morse(input(), "ru"))
+            else:
+                print(encode_to_morse(input(), "ru"))
+            print("Хотите сделать что-то еще?")
+            print(f'{name.capitalize()}, вы хотите еще раз протестировать нашу программу?')
+            while True:
+                request = input()
+                if request.lower() == 'нет':
+                    exit()
+                elif request.lower() == "да":
+                    break
+                elif request.lower() == "/exit":
+                    exit()
+                print("Неправильно введен запрос!")
+                print(f'{name.capitalize()}, вы хотите еще раз протестировать нашу программу?')
     else:
-        print('')
-#это короче функция главная, из которой менюшка идет, ну так должна по крайней мере, но щас она запускается только 2 раза, я хз как ее зациклить по нормальному
+        print("ATTENTION!\n"
+              "Our program can encode or decode to/from Morse code from/to text!"
+              "( but when program decoding text all letters will lowercase =D )\n"
+              "U can type (anytime) '/exit' to exit the program as well.")
+        print("What do you want?: encode or decode text?")
 
-main1()
+        while True:
+            request = input()
+            if request.lower() != 'decode' and request.lower() != 'encode':
+                print("Incorrect request!")
+                print("What do you want?: encode or decode text?")
+                continue
+            elif request.lower() == "/exit":
+                exit()
+            break
 
+        print(f"Type text, which you want {request}:")
+        if request.lower() == 'decode':
+            print(decode_from_morse(input(), "en"))
+        else:
+            print(encode_to_morse(input(), "en"))
+        print(f'{name.capitalize()}, do you want to test our program one more time')
+        while True:
+            request = input()
+            if request.lower() == 'no' or request.lower() == "nope":
+                exit()
+            elif request.lower() == "yes" or request.lower() == "yeah" or request.lower() == "yep":
+                break
+            print("Incorrect request!")
+            print(f'{name.capitalize()}, do you want to test our program one more time')
+
+
+main()
