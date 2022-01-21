@@ -1,5 +1,5 @@
 """
-Made by Romashov Artem and Vyaltseva Daria.
+Make by Romashov Artem and Vyaltseva Daria.
 .
 .
 .
@@ -197,36 +197,37 @@ def main():
                 print("Неправильно введен запрос!")
                 print(f'{name.capitalize()}, вы хотите еще раз протестировать нашу программу?')
     else:
-        print("ATTENTION!\n"
-              "Our program can encode or decode to/from Morse code from/to text!"
-              "( but when program decoding text all letters will lowercase =D )\n"
-              "U can type (anytime) '/exit' to exit the program as well.")
-        print("What do you want?: encode or decode text?")
-
         while True:
-            request = input()
-            if request.lower() != 'decode' and request.lower() != 'encode':
-                print("Incorrect request!")
-                print("What do you want?: encode or decode text?")
-                continue
-            elif request.lower() == "/exit":
-                exit()
-            break
+            print("ATTENTION!\n"
+                  "Our program can encode or decode to/from Morse code from/to text!"
+                  "( but when program decoding text all letters will lowercase =D )\n"
+                  "U can type (anytime) '/exit' to exit the program as well.")
+            print("What do you want?: encode or decode text?")
 
-        print(f"Type text, which you want {request}:")
-        if request.lower() == 'decode':
-            print(decode_from_morse(input(), "en"))
-        else:
-            print(encode_to_morse(input(), "en"))
-        print(f'{name.capitalize()}, do you want to test our program one more time')
-        while True:
-            request = input()
-            if request.lower() == 'no' or request.lower() == "nope":
-                exit()
-            elif request.lower() == "yes" or request.lower() == "yeah" or request.lower() == "yep":
+            while True:
+                request = input()
+                if request.lower() != 'decode' and request.lower() != 'encode':
+                    print("Incorrect request!")
+                    print("What do you want?: encode or decode text?")
+                    continue
+                elif request.lower() == "/exit":
+                    exit()
                 break
-            print("Incorrect request!")
+
+            print(f"Type text, which you want {request}:")
+            if request.lower() == 'decode':
+                print(decode_from_morse(input(), "en"))
+            else:
+                print(encode_to_morse(input(), "en"))
             print(f'{name.capitalize()}, do you want to test our program one more time')
+            while True:
+                request = input()
+                if request.lower() == 'no' or request.lower() == "nope":
+                    exit()
+                elif request.lower() == "yes" or request.lower() == "yeah" or request.lower() == "yep":
+                    break
+                print("Incorrect request!")
+                print(f'{name.capitalize()}, do you want to test our program one more time')
 
 
 main()
