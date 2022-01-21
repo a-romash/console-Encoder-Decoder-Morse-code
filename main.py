@@ -1,5 +1,5 @@
 """
-Make by Romashov Artem and Vyaltseva Daria.
+Made by Romashov Artem and Vyaltseva Daria.
 .
 .
 .
