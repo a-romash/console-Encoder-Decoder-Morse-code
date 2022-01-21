@@ -1,4 +1,12 @@
-﻿MORSE_CODE_RU = {'а': '.-',
+"""
+Make by Romashov Artem and Vyaltseva Daria.
+.
+.
+.
+=D
+"""
+
+MORSE_CODE_RU = {'а': '.-',
                  'б': '-...',
                  'в': '.--',
                  'г': '--.',
@@ -30,6 +38,28 @@
                  'э': '..-..',
                  'ю': '..--',
                  'я': '.-.-',
+                 '@': '.−−.−.',
+                 '+': '.-.-.',
+                 '!': '--..--',
+                 '?': '..--..',
+                 ';': '-.-.-.',
+                 ':': '---...',
+                 ',': '.−.−.−',
+                 '.': '......',
+                 '1': '.----',
+                 '2': '..---',
+                 '3': '...--',
+                 '4': '....-',
+                 '5': '.....',
+                 '6': '-....',
+                 '7': '--...',
+                 '8': '---..',
+                 '9': '----.',
+                 '0': '-----',
+                 "'": '.----.',
+                 '"': '.-..-.',
+                 '-': '-....-',
+                 '_': '..--.-',
                  ' ': ' '}
 MORSE_CODE_EN = {'a': '.-',
                  'b': '-...',
@@ -57,11 +87,32 @@ MORSE_CODE_EN = {'a': '.-',
                  'x': '-..-',
                  'y': '-.--',
                  'z': '--..',
+                 '@': '.−−.−.',
+                 '+': '.-.-.',
+                 '!': '--..--',
+                 '?': '..--..',
+                 ';': '-.-.-.',
+                 ':': '---...',
+                 ',': '.−.−.−',
+                 '.': '......',
+                 '1': '.----',
+                 '2': '..---',
+                 '3': '...--',
+                 '4': '....-',
+                 '5': '.....',
+                 '6': '-....',
+                 '7': '--...',
+                 '8': '---..',
+                 '9': '----.',
+                 '0': '-----',
+                 "'": '.----.',
+                 '"': '.-..-.',
+                 '-': '-....-',
+                 '_': '..--.-',
                  ' ': ' '}
 
 
 def decode_from_morse(code, lang):
-    # ну тут понятно я думаю, это декодировать
     if lang.lower() == "en":
         code = code.split()
         decode = ''
@@ -69,7 +120,8 @@ def decode_from_morse(code, lang):
             for key, codex in MORSE_CODE_EN.items():
                 if elem == codex:
                     decode += key
-        return decode.capitalize()
+        return decode.capitalize() if decode.capitalize() != '' \
+            else "Something gone wrong. I mean you used letters, buy you should use '.' and '-'"
     elif lang.lower() == "ru":
         code = code.split()
         decode = ''
@@ -77,7 +129,8 @@ def decode_from_morse(code, lang):
             for key, codex in MORSE_CODE_RU.items():
                 if elem == codex:
                     decode += key
-        return decode.capitalize()
+        return decode.capitalize() if decode.capitalize() != '' \
+            else "Что-то пошло не так. Я думаю вы использовали буквы, а должны были '.' и '-'"
 
 
 def encode_to_morse(text, lang="en"):
@@ -98,13 +151,15 @@ def encode_to_morse(text, lang="en"):
 def main():
     print("Howdy! What's your name?")
     name = input()
-    print(f"Hello, {name}! Welcome to our 'Encoder/Decoder Morse code'! Please, choose your language (ru/en)")
+    print(f"Hello, {name}! Welcome to our 'Encoder/Decoder Morse code'!"
+          f" Please, choose your language (ru/en)")
     while True:
         lang = input()
         if lang.lower() == "ru" or lang.lower() == "en":
             break
         print("Incorrect request!")
-        print(f"Hello, {name}! Welcome to our 'Encoder/Decoder Morse code'! Please, choose your language (ru/en)")
+        print(f"Hello, {name}! Welcome to our 'Encoder/Decoder Morse code'!"
+              f" Please, choose your language (ru/en)")
     if lang.lower() == "ru":
         while True:
             print("ПРЕДУПРЕЖДЕНИЕ!\n"
